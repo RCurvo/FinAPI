@@ -113,4 +113,15 @@ app.get("/account", verifyIfExistsAccountCPF, (request, response) => {
     return response.json(customer)
 })
 
+app.delete("/account", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request
+
+    const indexCustomer = customers.findIndex(
+        customerIndex => customerIndex.cpf === customer.cpf);
+
+    customers.splice(indexCustomer, 1);
+
+    return response.status(200).json(customers)
+})
+
 app.listen(3333);
